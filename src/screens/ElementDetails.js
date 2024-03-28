@@ -1,12 +1,13 @@
 import { useContext } from "react";
-import { Image, StyleSheet, View ,Text} from "react-native";
+import { Image, StyleSheet, View ,Text, ScrollView} from "react-native";
 import { contexto } from "../context/ContextoGeneral";
+import { ItemElement } from "../components/ItemElementDetail";
 
 export function ElementsDetails({navigation}) {
+
     const {elementSelect} = useContext(contexto);
-    console.log(elementSelect.color)
-    const colores = ['#93FA73']
-    const colorCategoryText = elementSelect.color === '#93FA73' ? 'black' : '#ffff';
+
+    const colorCategoryText = elementSelect.color === '#93FA73' || elementSelect.color === 'white'? 'black' : '#ffff';
     return(
         <View style={stilos.screen}>
             <View style={stilos.headerElement}>
@@ -35,6 +36,19 @@ export function ElementsDetails({navigation}) {
                     {elementSelect.category}
                 </Text>
             </View>
+            <ScrollView style={stilos.main}>
+                <View style={{paddingBottom:80}}>
+                    <ItemElement label={'Descubierto por: '} value={elementSelect.discovered_by}/>
+                    <ItemElement label={'Configuración electronica: '} value={elementSelect.electron_configuration}/>
+                    <ItemElement label={'Semantica de configuración electronica: '} value={elementSelect.electron_configuration_semantic}/>
+                    <ItemElement label={'Afinidad_electrónica: '} value={elementSelect.electron_affinity}/>
+                    <ItemElement label={'Electronegatividad: '} value={elementSelect.electronegativity_pauling}/>
+                    <ItemElement label={'Densidad: '} value={elementSelect.density}/>
+                    <ItemElement label={'Periodo: '} value={elementSelect.period}/>
+                    <ItemElement label={'Grupo: '} value={elementSelect.group} />
+                    <ItemElement label={'Fase: '} value={elementSelect.phase}/>
+                </View>
+            </ScrollView>
         </View>
     )
 }
@@ -47,7 +61,6 @@ const stilos = StyleSheet.create({
     },
     headerElement:{
         position:'relative',
-        backgroundColor:'red',
         width:'100%',
         height:250
     },
@@ -67,7 +80,7 @@ const stilos = StyleSheet.create({
         backgroundColor:'rgba(0,0,0,0.4)',
         justifyContent:'flex-end',
         flexWrap:'wrap',
-        padding:5
+        padding:15
     },
     containerScroll:{
         height:'87%',
@@ -92,8 +105,7 @@ const stilos = StyleSheet.create({
     },
     category:{
         position:'absolute',
-        width:240,
-        height:40,
+        height:50,
         borderTopLeftRadius:5,
         borderBottomLeftRadius:5,
         textAlign:'right',
@@ -102,5 +114,15 @@ const stilos = StyleSheet.create({
         right:0,
         fontWeight:'900',
         textAlignVertical:'center',
+        fontSize:16,
+        maxWidth:220,
+        width:'auto',
+        paddingLeft:15
+
+    },
+    main:{
+        height:'100%',
+        width:'100%',
+        minWidth:380,
     }
 });

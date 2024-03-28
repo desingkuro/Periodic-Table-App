@@ -25,16 +25,16 @@ export function TabNavigationBar() {
             },
             tabBarStyle:{
                 height:55,
-                width:"98%",
+                width:"95%",
                 borderRadius:20,
                 alignSelf:'center',
                 justifyContent:'center',
-                marginBottom:15,
+                marginBottom:30,
                 backgroundColor:'#635985',
                 position: 'absolute', // Eliminar el espacio en blanco detrás de la barra de navegación
-                left:5,
-                alignItems:'center',
-                right:5
+                left:'2.5%',
+                right:'2.5%',
+                borderColor:'#635985'
             },
             tabBarLabelStyle:{
                 fontSize:10

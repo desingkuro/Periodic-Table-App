@@ -8,7 +8,9 @@ export function Calculadora({navigation}) {
     
     return(
         <View style={estilos.screen}>
-            <OptionCalc text={'Identificación de compuestos inorgánicos'} color={'#FAA624'} />
+            <OptionCalc text={'Identificación de compuestos inorgánicos'} color={'#FAA624'} 
+                goToPage={()=>goToPage(navigation,'Inorganicos')}
+            />
             <OptionCalc text={'Calcular Proporciones'} color={'#FA3812'}/>
             <OptionCalc text={'Estequiometria'} color={'#9201FA'} goToPage={()=>goToPage(navigation,'Estequiometria')}/>
             <OptionCalc text={'Reacciones químicas Inorgánicas'} color={'#636AFA'}/>

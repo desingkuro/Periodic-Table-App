@@ -4,6 +4,7 @@ import { ElementsDetails } from '../screens/ElementDetails';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Calculadora } from '../screens/Calculadora';
 import { Estequiometria } from '../screens/Estequiometria';
+import { CompuestosInorganicos } from '../screens/CompuestosInorganico';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,7 @@ export function MyStack() {
       <Stack.Screen name="Elemento" component={ElementsDetails} />
       <Stack.Screen name="Calculadora" component={Calculadora} />
       <Stack.Screen name="Estequiometria" component={Estequiometria} />
+      <Stack.Screen name="Inorganicos" component={CompuestosInorganicos} />
     </Stack.Navigator>
   );
 }

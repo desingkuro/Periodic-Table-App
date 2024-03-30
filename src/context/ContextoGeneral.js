@@ -12,8 +12,13 @@ export function ContextoGeneral({children}) {
         'fondo':'#222831',
         'secundario':'#31363F'
     }
+
+    function goToPage(navigation,screen){
+        navigation.navigate(screen);
+    }
+
     return(
-        <contexto.Provider value={{colors,datosTabla,elementSelect,setElementSelect}}>
+        <contexto.Provider value={{colors,datosTabla,elementSelect,setElementSelect,goToPage}}>
             {children}
         </contexto.Provider>
     )

@@ -2,6 +2,8 @@ import { createStackNavigator,CardStyleInterpolators } from '@react-navigation/s
 import { Table } from '../screens/Table';
 import { ElementsDetails } from '../screens/ElementDetails';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Calculadora } from '../screens/Calculadora';
+import { Estequiometria } from '../screens/Estequiometria';
 
 const Stack = createStackNavigator();
 
@@ -20,11 +22,10 @@ export function MyStack() {
       headerBackImage:()=><MaterialCommunityIcons name="keyboard-backspace" size={34} color="white" />,
       cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS, // Personaliza tu animación aquí
     }}>
-      <Stack.Screen name="Tabla" component={Table} 
-        options={{
-        }}
-      />
+      <Stack.Screen name="Tabla" component={Table}/>
       <Stack.Screen name="Elemento" component={ElementsDetails} />
+      <Stack.Screen name="Calculadora" component={Calculadora} />
+      <Stack.Screen name="Estequiometria" component={Estequiometria} />
     </Stack.Navigator>
   );
 }

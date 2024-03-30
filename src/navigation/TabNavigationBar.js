@@ -10,18 +10,17 @@ const Tab = createBottomTabNavigator();
 
 export function TabNavigationBar() {
     const{colors}=useContext(contexto);
-    const iconSize=25;
-    const iconColor="#ffff";
+    const iconSize=29
     return(
         <Tab.Navigator screenOptions={({ route }) => ({
-            tabBarActiveTintColor:'#ffff',
-            tabBarInactiveTintColor:'#222831',
+            tabBarActiveTintColor:'#000000',
+            tabBarInactiveTintColor:'#c9c9c9',
             tabBarItemStyle:{
                 paddingVertical:0,
                 padding:0,
                 borderRadius: 50, // Hacerlo circular
-                backgroundColor: route.name === 'Tabla Periodica' || route.name === 'Calculadora' ? '#635985' : '#222831', // Cambiar el color de fondo cuando está activo
-                marginBottom:3
+                backgroundColor: route.name === 'Tabla Periodica' || route.name === 'Calculadora' ? '#ffff' : '#222831', // Cambiar el color de fondo cuando está activo
+                marginBottom:3,
             },
             tabBarStyle:{
                 height:55,
@@ -30,7 +29,7 @@ export function TabNavigationBar() {
                 alignSelf:'center',
                 justifyContent:'center',
                 marginBottom:30,
-                backgroundColor:'#635985',
+                backgroundColor:'#ffff',
                 position: 'absolute', // Eliminar el espacio en blanco detrás de la barra de navegación
                 left:'2.5%',
                 right:'2.5%',

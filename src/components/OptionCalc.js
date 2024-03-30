@@ -1,9 +1,12 @@
 import { StyleSheet, View, TouchableOpacity,Text } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-export function OptionCalc({ text }) {
+export function OptionCalc({ text, color }) {
+    
+    const border = color == undefined?'white':color;
+
     return (
-        <TouchableOpacity style={estilos.container}>
+        <TouchableOpacity style={[estilos.container,{borderLeftColor:border,borderLeftWidth:5}]}>
             <View style={estilos.containerText}>
                 <Text style={{color:'#ffff',fontSize:20}}>
                     {text}
@@ -20,7 +23,6 @@ const estilos = StyleSheet.create({
         width:'100%',
         height:100,
         flexWrap:'wrap',
-        borderColor:'gray',
         borderBottomWidth:1
     },
     containerText:{

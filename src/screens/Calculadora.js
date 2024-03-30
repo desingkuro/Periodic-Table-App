@@ -1,13 +1,12 @@
 import { StyleSheet, View } from "react-native";
-import {ItemElement} from '../components/ItemElementDetail'
 import { OptionCalc } from "../components/OptionCalc";
 
 export function Calculadora() {
     return(
         <View style={estilos.screen}>
-            <OptionCalc text={'Identificacion de compuestos inorganicos'}/>
-            <OptionCalc text={'Calcular Proporciones'}/>
-            <OptionCalc text={'Reacciones quimicas Inorganicas'}/>
+            <OptionCalc text={'Identificacion de compuestos inorganicos'} color={'#FAA624'}/>
+            <OptionCalc text={'Calcular Proporciones'} color={'#FA3812'}/>
+            <OptionCalc text={'Reacciones quimicas Inorganicas'} color={'#636AFA'}/>
         </View>
     )
 }

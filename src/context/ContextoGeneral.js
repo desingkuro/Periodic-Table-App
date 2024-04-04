@@ -107,7 +107,7 @@ export function ContextoGeneral({children}) {
         const identificado = identificarMetaYNoMetal(elemento)
         if(identificado){
             return('Óxido Básico')
-        }else if(identificado){
+        }else{
             return('Óxido Ácidos o anhídridos')
         }
     }
@@ -127,7 +127,7 @@ export function ContextoGeneral({children}) {
         const identificado = identificarMetaYNoMetal(elemento)
         if(identificado){
             return('Hidruro Metálico')
-        }else if(identificado){
+        }else{
             return('Hidruro no Metálico')
         }
     }
@@ -165,11 +165,15 @@ export function ContextoGeneral({children}) {
                     </Text>
                 )
             }else if (tamaño == 3 && elementosIdentificados[1].simbolo === 'H') {
-                return(
-                    <Text style={estilos.elementoIdentificado}>
-                        Hidracido
-                    </Text>
-                )
+                const hidracido = identificarMetaYNoMetal(elementoFinal.simbolo)
+                if(!hidracido){
+                    return(
+                        <Text style={estilos.elementoIdentificado}>
+                            Hidracido
+                        </Text>
+                    )
+                }
+                
             }else if (tamaño == 3) {
                 const identificado1 = identificarMetaYNoMetal(elementosIdentificados[1].simbolo);
                 const identificado2 = identificarMetaYNoMetal(elementoFinal.simbolo);

@@ -12,7 +12,7 @@ export function Boton({color,funcion,text,colorText}) {
 const estilos = StyleSheet.create({
     Boton:{
         height:60,
-        width:'80%',
+        width:'90%',
         borderRadius:15,
         alignItems:'center',
         justifyContent:'center'

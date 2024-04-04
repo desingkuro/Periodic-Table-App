@@ -1,4 +1,4 @@
-const fs = require('fs');
+/*const fs = require('fs');
 
 const categoryElements = [
     { 'Metales alcalinos': '#FA3812' },
@@ -6304,7 +6304,7 @@ const categoryElements = [
 fs.writeFile('elements.json', elementsJSON, (err) => {
   if (err) throw err;
   console.log('Los datos han sido guardados en elements.json');
-});
+});*/
   
 
   

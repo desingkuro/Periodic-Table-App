@@ -15,7 +15,7 @@ export const CellElement = React.memo(function CellElement({
   element,
   funcion
 }: CellProps) {
-  const { setElementSelect } = useContext(contexto);
+  const { setElementSelect }:any = useContext(contexto);
 
   function initElement() {
     setElementSelect(element);

@@ -2,20 +2,23 @@ import { CellElement } from "@/shared/components/CellElement";
 import ScreenView from "@/shared/components/ViewScreen";
 import { contexto } from "@/shared/context/ContextoGeneral";
 import { buildPeriodicGrid, COLS, GridCell } from "@/shared/hooks/useGrid";
+import { ElementoQuimico } from "@/shared/interfaces/Table.interface";
+import { useRouter } from "expo-router";
 import React, { useCallback, useContext, useMemo } from "react";
 import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 
 const CELL = 100;
 
 export default function Table() {
-    const { datosTabla } = useContext(contexto);
+    const router = useRouter();
+    const { datosTabla, setElementSelect }: any = useContext(contexto);
 
     const { grid } = useMemo(
         () => buildPeriodicGrid(datosTabla ?? []),
         [datosTabla]
     );
 
-    const renderItem = useCallback(({ item }: { item: GridCell }) => {
+    const renderItem = useCallback(({ item, index }: { item: GridCell, index: number }) => {
         switch (item.type) {
             case "corner":
                 return <View style={styles.cornerCell} />;
@@ -55,7 +58,7 @@ export default function Table() {
                 return <View style={styles.emptyCell} />;
 
             case "element":
-                return <CellElement element={item.element} funcion={() => { }} />;
+                return <CellElement element={item.element} funcion={() => {toggleElementSelect(item.element)}} />;
 
             default:
                 return <View style={styles.emptyCell} />;
@@ -72,6 +75,11 @@ export default function Table() {
         },
         []
     );
+
+    const toggleElementSelect = (element: ElementoQuimico | null) => {
+        setElementSelect(element);
+        router.push('/(tabs)/(table)/DetailElement');
+    };
 
     return (
         <ScreenView top={true} bottom={false}>

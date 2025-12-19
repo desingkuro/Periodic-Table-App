@@ -8,15 +8,18 @@ import dataNoMetales from '../Api/classElement/NoMetales.json';*/
 /*const [metales, setMetales] = useState(dataMetales.Metales);
 const [noMetales, setNoMetales] = useState(dataNoMetales.noMetales);*/
 
-export const contexto = createContext<any>(null);
+export interface ContextoGeneralInterface {
+    datosTabla: ElementoQuimico[];
+    elementSelect: ElementoQuimico | null;
+    setElementSelect: (element: ElementoQuimico | null) => void;
+}
+
+export const contexto = createContext<ContextoGeneralInterface | null>(null);
 
 export function ContextoGeneral({ children }: any) {
     const [datosTabla, setDatosTabla] = useState<ElementoQuimico[]>(data.elements.map((e:any)=>e as ElementoQuimico) );
     const [elementSelect, setElementSelect] = useState<ElementoQuimico | null>(null);
 
-    function goToPage(navigation: any, screen: any) {
-        navigation.navigate(screen);
-    }
     /*
     function identificacionCoeficientes(elementos: any) {
         let coeficienteDelCompuesto = 1;
@@ -173,7 +176,7 @@ export function ContextoGeneral({ children }: any) {
     return (
         <contexto.Provider value={{
             datosTabla, elementSelect,
-            setElementSelect, goToPage,
+            setElementSelect,
         }}>
             {children}
         </contexto.Provider>

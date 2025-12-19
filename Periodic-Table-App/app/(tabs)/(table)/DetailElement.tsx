@@ -1,12 +1,12 @@
 // ElementDetailScreen.tsx
 import EstructuraTab from "@/shared/components/EstructuraTab";
 import PropiedadesTab from "@/shared/components/PropiedadesTab";
-import ResumenTab from "@/shared/components/ResumenTab";
+import { ResumenTab } from "@/shared/components/ResumenTab";
 import Section from "@/shared/components/Section";
 import { contexto } from "@/shared/context/ContextoGeneral";
 import { ElementoQuimico } from "@/shared/interfaces/Table.interface";
 import { Ionicons } from "@expo/vector-icons";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
     Image,
     Linking,
@@ -22,6 +22,26 @@ type Tab = "resumen" | "propiedades" | "estructura" | "mas";
 export default function ElementDetailScreen() {
     const [activeTab, setActiveTab] = useState<Tab>("resumen");
     const { elementSelect }: any = useContext(contexto);
+    
+    // ← GUARDAR LOCALMENTE para evitar que se pierda durante la transición
+    const [localElement, setLocalElement] = useState<ElementoQuimico | null>(elementSelect);
+
+    useEffect(() => {
+        if (elementSelect) {
+            setLocalElement(elementSelect);
+        }
+    }, [elementSelect]);
+
+    // Usar localElement en vez de elementSelect
+    const element = localElement || elementSelect;
+
+    if (!element) {
+        return (
+            <View style={styles.container}>
+                <Text style={{ color: 'white' }}>Cargando...</Text>
+            </View>
+        );
+    }
 
     const openLink = (url: string) => {
         if (url) Linking.openURL(url);
@@ -30,18 +50,18 @@ export default function ElementDetailScreen() {
     return (
         <View style={styles.container}>
             {/* Header */}
-            <View style={[styles.header, { backgroundColor: elementSelect.categoria_color }]}>
+            <View style={[styles.header, { backgroundColor: element.categoria_color }]}>
 
                 <View style={styles.headerContent}>
-                    <Text style={styles.headerNumber}>{elementSelect.numero}</Text>
-                    <Text style={styles.headerSymbol}>{elementSelect.simbolo}</Text>
-                    <Text style={styles.headerName}>{elementSelect.nombre}</Text>
-                    <Text style={styles.headerCategory}>{elementSelect.categoria}</Text>
+                    <Text style={styles.headerNumber}>{element.numero}</Text>
+                    <Text style={styles.headerSymbol}>{element.simbolo}</Text>
+                    <Text style={styles.headerName}>{element.nombre}</Text>
+                    <Text style={styles.headerCategory}>{element.categoria}</Text>
                 </View>
 
-                {elementSelect.modelo_bohr_imagen && (
+                {element.modelo_bohr_imagen && (
                     <Image
-                        source={{ uri: elementSelect.modelo_bohr_imagen }}
+                        source={{ uri: element.modelo_bohr_imagen }}
                         style={styles.bohrImage}
                         resizeMode="contain"
                     />
@@ -62,7 +82,7 @@ export default function ElementDetailScreen() {
                             styles.tab,
                             activeTab === tab.id && [
                                 styles.tabActive,
-                                { borderBottomColor: elementSelect.categoria_color },
+                                { borderBottomColor: element.categoria_color },
                             ],
                         ]}
                         onPress={() => setActiveTab(tab.id as Tab)}
@@ -81,11 +101,11 @@ export default function ElementDetailScreen() {
 
             {/* Content */}
             <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-                {activeTab === "resumen" && <ResumenTab element={elementSelect} />}
-                {activeTab === "propiedades" && <PropiedadesTab element={elementSelect} />}
-                {activeTab === "estructura" && <EstructuraTab element={elementSelect} />}
+                {activeTab === "resumen" && <ResumenTab element={element} />}
+                {activeTab === "propiedades" && <PropiedadesTab element={element} />}
+                {activeTab === "estructura" && <EstructuraTab element={element} />}
                 {activeTab === "mas" && (
-                    <MasTab element={elementSelect} onOpenLink={openLink} />
+                    <MasTab element={element} onOpenLink={openLink} />
                 )}
             </ScrollView>
         </View>

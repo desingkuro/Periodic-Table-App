@@ -8,7 +8,7 @@ export default function LayoutTable() {
     const { elementSelect }: any = useContext(contexto);
     const router = useRouter();
     return (
-        <Stack screenOptions={{ animation: "slide_from_right" }}>
+        <Stack screenOptions={{ animation: "default" }}>
             <Stack.Screen name="Index" options={{ headerShown: false }} />
             <Stack.Screen name="DetailElement"
                 options={{
@@ -16,6 +16,7 @@ export default function LayoutTable() {
                     headerStyle: { backgroundColor: "#474747" },
                     headerTitleStyle: { color: elementSelect?.categoria_color },
                     headerTintColor: elementSelect?.categoria_color,
+                    freezeOnBlur: true,
                     headerLeft: () => (
                         <TouchableOpacity onPress={() => router.back()} style={{ marginRight: 16 }}>
                             <Ionicons name="arrow-back" size={24} color="white" />

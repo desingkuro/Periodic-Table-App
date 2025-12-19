@@ -1,13 +1,21 @@
 import { ElementoQuimico } from "@/shared/interfaces/Table.interface";
 import { Image } from "expo-image";
-import { useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import ImageViewerModal from "./ImageViewerModal";
 import InfoCard from "./InfoCard";
-export default function ResumenTab({ element }: { element: ElementoQuimico }) {
+
+
+export const ResumenTab = memo(({ element }: { element: ElementoQuimico }) => {
     const [imageError, setImageError] = useState(false);
     const [imageLoading, setImageLoading] = useState(true);
     const [showImageModal, setShowImageModal] = useState(false);
+
+    useEffect(() => {
+        return () => {
+            setShowImageModal(false);
+        };
+    }, []);
 
     const imagen = useMemo(() => {
         return <Image
@@ -82,7 +90,7 @@ export default function ResumenTab({ element }: { element: ElementoQuimico }) {
             />
         </View>
     );
-}
+});
 
 
 const styles = StyleSheet.create({

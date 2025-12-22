@@ -3,6 +3,7 @@ import EstructuraTab from "@/shared/components/EstructuraTab";
 import PropiedadesTab from "@/shared/components/PropiedadesTab";
 import { ResumenTab } from "@/shared/components/ResumenTab";
 import Section from "@/shared/components/Section";
+import ScreenView from "@/shared/components/ViewScreen";
 import { contexto } from "@/shared/context/ContextoGeneral";
 import { ElementoQuimico } from "@/shared/interfaces/Table.interface";
 import { Ionicons } from "@expo/vector-icons";
@@ -22,7 +23,7 @@ type Tab = "resumen" | "propiedades" | "estructura" | "mas";
 export default function ElementDetailScreen() {
     const [activeTab, setActiveTab] = useState<Tab>("resumen");
     const { elementSelect }: any = useContext(contexto);
-    
+
     // ← GUARDAR LOCALMENTE para evitar que se pierda durante la transición
     const [localElement, setLocalElement] = useState<ElementoQuimico | null>(elementSelect);
 
@@ -48,67 +49,69 @@ export default function ElementDetailScreen() {
     };
 
     return (
-        <View style={styles.container}>
-            {/* Header */}
-            <View style={[styles.header, { backgroundColor: element.categoria_color }]}>
+        <ScreenView>
+            <View style={styles.container}>
+                {/* Header */}
+                <View style={[styles.header, { backgroundColor: element.categoria_color }]}>
 
-                <View style={styles.headerContent}>
-                    <Text style={styles.headerNumber}>{element.numero}</Text>
-                    <Text style={styles.headerSymbol}>{element.simbolo}</Text>
-                    <Text style={styles.headerName}>{element.nombre}</Text>
-                    <Text style={styles.headerCategory}>{element.categoria}</Text>
+                    <View style={styles.headerContent}>
+                        <Text style={styles.headerNumber}>{element.numero}</Text>
+                        <Text style={styles.headerSymbol}>{element.simbolo}</Text>
+                        <Text style={styles.headerName}>{element.nombre}</Text>
+                        <Text style={styles.headerCategory}>{element.categoria}</Text>
+                    </View>
+
+                    {element.modelo_bohr_imagen && (
+                        <Image
+                            source={{ uri: element.modelo_bohr_imagen }}
+                            style={styles.bohrImage}
+                            resizeMode="contain"
+                        />
+                    )}
                 </View>
 
-                {element.modelo_bohr_imagen && (
-                    <Image
-                        source={{ uri: element.modelo_bohr_imagen }}
-                        style={styles.bohrImage}
-                        resizeMode="contain"
-                    />
-                )}
-            </View>
-
-            {/* Tabs */}
-            <View style={styles.tabContainer}>
-                {[
-                    { id: "resumen", label: "Resumen" },
-                    { id: "propiedades", label: "Propiedades" },
-                    { id: "estructura", label: "Estructura" },
-                    { id: "mas", label: "Más" },
-                ].map((tab) => (
-                    <TouchableOpacity
-                        key={tab.id}
-                        style={[
-                            styles.tab,
-                            activeTab === tab.id && [
-                                styles.tabActive,
-                                { borderBottomColor: element.categoria_color },
-                            ],
-                        ]}
-                        onPress={() => setActiveTab(tab.id as Tab)}
-                    >
-                        <Text
+                {/* Tabs */}
+                <View style={styles.tabContainer}>
+                    {[
+                        { id: "resumen", label: "Resumen" },
+                        { id: "propiedades", label: "Propiedades" },
+                        { id: "estructura", label: "Estructura" },
+                        { id: "mas", label: "Más" },
+                    ].map((tab) => (
+                        <TouchableOpacity
+                            key={tab.id}
                             style={[
-                                styles.tabText,
-                                activeTab === tab.id && styles.tabTextActive,
+                                styles.tab,
+                                activeTab === tab.id && [
+                                    styles.tabActive,
+                                    { borderBottomColor: element.categoria_color },
+                                ],
                             ]}
+                            onPress={() => setActiveTab(tab.id as Tab)}
                         >
-                            {tab.label}
-                        </Text>
-                    </TouchableOpacity>
-                ))}
-            </View>
+                            <Text
+                                style={[
+                                    styles.tabText,
+                                    activeTab === tab.id && styles.tabTextActive,
+                                ]}
+                            >
+                                {tab.label}
+                            </Text>
+                        </TouchableOpacity>
+                    ))}
+                </View>
 
-            {/* Content */}
-            <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-                {activeTab === "resumen" && <ResumenTab element={element} />}
-                {activeTab === "propiedades" && <PropiedadesTab element={element} />}
-                {activeTab === "estructura" && <EstructuraTab element={element} />}
-                {activeTab === "mas" && (
-                    <MasTab element={element} onOpenLink={openLink} />
-                )}
-            </ScrollView>
-        </View>
+                {/* Content */}
+                <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+                    {activeTab === "resumen" && <ResumenTab element={element} />}
+                    {activeTab === "propiedades" && <PropiedadesTab element={element} />}
+                    {activeTab === "estructura" && <EstructuraTab element={element} />}
+                    {activeTab === "mas" && (
+                        <MasTab element={element} onOpenLink={openLink} />
+                    )}
+                </ScrollView>
+            </View>
+        </ScreenView>
     );
 }
 

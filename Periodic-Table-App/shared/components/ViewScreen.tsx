@@ -12,7 +12,7 @@ export default function ScreenView({ children, top, bottom }: ScreenViewProps) {
     const insets = useSafeAreaInsets();
     return (
         <View style={{
-            flex: 1, paddingBottom: bottom ? insets.bottom : 0, paddingTop: top ? insets.top : 0,
+            flex: 1, paddingBottom: bottom ? insets.bottom+40 : 65, paddingTop: top ? insets.top : 0,
             backgroundColor: ColorsPrimary.fondo,
         }}>
             {children}

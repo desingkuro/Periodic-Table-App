@@ -1,19 +1,25 @@
-// shared/components/CombustionReaction.tsx
-import { useCombustionExercise } from "@/shared/hooks/useCombustionExercise";
+// components/AcidBaseNeutralization.tsx
+import { useAcidBaseExercise } from "@/shared/hooks/useAcidBaseExercise";
 import React from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import CombustionModal from "./CombustionModal";
+import {
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+} from "react-native";
+import { AcidBaseResultModal } from "./AcidBaseResultModal";
 
-interface CombustionReactionProps {
-    fuelFormula?: string;
-    fuelName?: string;
-}
+export default function AcidBaseNeutralization() {
+    const {
+        acidInput,
+        setAcidInput,
+        baseInput,
+        setBaseInput,
+        result,
+        generate,
+    } = useAcidBaseExercise();
 
-export default function CombustionReaction({
-    fuelFormula = "CH₄",
-    fuelName = "Metano",
-}: CombustionReactionProps) {
-    const { input, setInput, result, generate, reset } = useCombustionExercise();
     const [showModal, setShowModal] = React.useState(false);
 
     const onSolve = () => {
@@ -21,66 +27,75 @@ export default function CombustionReaction({
         setShowModal(true);
     };
 
-    const closeModal = () => {
-        setShowModal(false);
-    };
-
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Reacción de combustión</Text>
+            {/* Ejemplo explicado */}
+            <Text style={styles.title}>Reacción ácido–base (neutralización)</Text>
             <Text style={styles.subtitle}>
-                Combustión completa de un hidrocarburo: reacciona con oxígeno y forma dióxido de carbono y agua.
+                Un ácido reacciona con una base para formar una sal y agua.[web:120]
             </Text>
 
+            {/* Zona de ejercicios */}
             <View style={styles.exerciseCard}>
-                <Text style={styles.cardTitle}>Practica: genera la combustión</Text>
+                <Text style={styles.cardTitle}>Practica: genera la neutralización</Text>
                 <Text style={styles.exerciseText}>
-                    Escribe la fórmula de un hidrocarburo (CxHy) y genera la ecuación de combustión completa.
+                    Escribe la fórmula de un ácido (HX) y de una base (MOH). Se generará
+                    la ecuación de neutralización correspondiente.
                 </Text>
 
+                <Text style={styles.label}>Ácido (ej: HCl, HBr)</Text>
                 <TextInput
-                    value={input}
-                    onChangeText={setInput}
-                    placeholder="Ej: CH4, C2H6, C3H8"
+                    value={acidInput}
+                    onChangeText={setAcidInput}
+                    placeholder="HCl"
+                    placeholderTextColor="#777"
+                    autoCapitalize="characters"
+                    style={styles.input}
+                />
+
+                <Text style={styles.label}>Base (ej: NaOH, KOH)</Text>
+                <TextInput
+                    value={baseInput}
+                    onChangeText={setBaseInput}
+                    placeholder="NaOH"
                     placeholderTextColor="#777"
                     autoCapitalize="characters"
                     style={styles.input}
                 />
 
                 <TouchableOpacity style={styles.button} onPress={onSolve}>
-                    <Text style={styles.buttonText}>Calcular combustión</Text>
+                    <Text style={styles.buttonText}>Calcular neutralización</Text>
                 </TouchableOpacity>
+            </View>
+
+            <View style={styles.card}>
+                <Text style={styles.cardTitle}>Ejemplo clásico</Text>
+                <Text style={styles.equationBig}>
+                    HCl + NaOH ⟶ NaCl + H₂O
+                </Text>
+                <Text style={styles.note}>
+                    El ácido clorhídrico reacciona con el hidróxido de sodio para formar
+                    cloruro de sodio (sal común) y agua.
+                </Text>
             </View>
 
             <View style={styles.card}>
                 <Text style={styles.cardTitle}>Forma general</Text>
                 <Text style={styles.equation}>
-                    Hidrocarburo + O₂ ⟶ CO₂ + H₂O
+                    Ácido (HX) + Base (MOH) ⟶ Sal (MX) + H₂O
                 </Text>
                 <Text style={styles.note}>
-                    Siempre interviene oxígeno y los productos principales son CO₂ y H₂O.
+                    HX representa un ácido binario y MOH una base fuerte típica; la sal se
+                    forma a partir del catión de la base y el anión del ácido.[web:120]
                 </Text>
             </View>
 
-            <View style={styles.card}>
-                <Text style={styles.cardTitle}>Ejemplo: {fuelName}</Text>
-                <Text style={styles.equationBig}>
-                    {fuelFormula} + 2 O₂ ⟶ CO₂ + 2 H₂O
-                </Text>
-                <Text style={styles.note}>
-                    Esta es la ecuación balanceada para la combustión completa del metano.
-                </Text>
-            </View>
-
-            <View style={styles.card}>
-                <Text style={styles.cardTitle}>¿Qué está pasando?</Text>
-                <Text style={styles.bullet}>• El combustible ({fuelFormula}) aporta carbono e hidrógeno.</Text>
-                <Text style={styles.bullet}>• El oxígeno del aire (O₂) es el agente oxidante.</Text>
-                <Text style={styles.bullet}>• El carbono se oxida a CO₂ y el hidrógeno a H₂O, liberando energía.</Text>
-            </View>
-
-            {/* Modal con resultado */}
-            <CombustionModal showModal={showModal} closeModal={closeModal} result={result}/>
+            {/* Modal de resultado */}
+            <AcidBaseResultModal
+                visible={showModal}
+                result={result}
+                onClose={() => setShowModal(false)}
+            />
         </View>
     );
 }
@@ -131,12 +146,7 @@ const styles = StyleSheet.create({
         color: "#b0bec5",
         fontSize: 12,
     },
-    bullet: {
-        color: "#e0e0e0",
-        fontSize: 13,
-        marginBottom: 4,
-    },
-    // Ejercicios
+    // ejercicios
     exerciseCard: {
         backgroundColor: "#11141b",
         borderRadius: 12,
@@ -150,6 +160,12 @@ const styles = StyleSheet.create({
         fontSize: 13,
         marginBottom: 10,
     },
+    label: {
+        color: "#bbbbbb",
+        fontSize: 13,
+        marginBottom: 4,
+        marginTop: 4,
+    },
     input: {
         backgroundColor: "#1f242f",
         borderRadius: 8,
@@ -158,7 +174,7 @@ const styles = StyleSheet.create({
         color: "white",
         borderWidth: 1,
         borderColor: "#333b4a",
-        marginBottom: 10,
+        marginBottom: 8,
         fontSize: 14,
     },
     button: {
@@ -166,6 +182,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         paddingVertical: 10,
         alignItems: "center",
+        marginTop: 6,
     },
     buttonText: {
         color: "white",

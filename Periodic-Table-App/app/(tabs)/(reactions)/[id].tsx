@@ -1,4 +1,5 @@
 // app/reactions/[id].tsx
+import AcidBaseNeutralization from "@/shared/components/reactions/AcidBaseNeutralization";
 import CombustionReaction from "@/shared/components/reactions/CombustionReaction";
 import ScreenView from "@/shared/components/ViewScreen";
 import { REACTIONS, ReactionItem } from "@/shared/data/reactions";
@@ -40,10 +41,12 @@ export default function ReactionDetailScreen() {
                 ? "#A5D6A7"
                 : "#FFD54F";
 
-    const switchScreenOptions = ()=>{
-        switch(reaction.id){
+    const switchScreenOptions = () => {
+        switch (reaction.id) {
             case "combustion":
                 return <CombustionReaction />
+            case "acid-base":
+                return <AcidBaseNeutralization />
             default:
                 return <Text>Reacción no encontrada</Text>
         }
@@ -52,26 +55,24 @@ export default function ReactionDetailScreen() {
     return (
         <ScreenView top bottom>
             {/* Encabezado simple dentro del contenido */}
-            <ScrollView contentContainerStyle={styles.content}>
-                <View style={styles.headerRow}>
-                    <View style={[styles.iconCircle, { backgroundColor: `${color}33` }]}>
-                        <Ionicons name={reaction.icon as any} size={28} color={color} />
-                    </View>
-                    <View style={{ flex: 1 }}>
-                        <Text style={styles.title}>{reaction.title}</Text>
-                        <Text style={styles.category}>
-                            {reaction.category === "inorganic"
-                                ? "Reacción inorgánica"
-                                : reaction.category === "organic"
-                                    ? "Reacción orgánica"
-                                    : "Identificación de compuestos"}
-                        </Text>
-                    </View>
+            <View style={styles.headerRow}>
+                <View style={[styles.iconCircle, { backgroundColor: `${color}33` }]}>
+                    <Ionicons name={reaction.icon as any} size={28} color={color} />
                 </View>
+                <View style={{ flex: 1 }}>
+                    <Text style={styles.title}>{reaction.title}</Text>
+                    <Text style={styles.category}>
+                        {reaction.category === "inorganic"
+                            ? "Reacción inorgánica"
+                            : reaction.category === "organic"
+                                ? "Reacción orgánica"
+                                : "Identificación de compuestos"}
+                    </Text>
+                </View>
+            </View>
 
-                <Text style={styles.description}>{reaction.description}</Text>
-
-                {/* Aquí puedes agregar pasos, ejemplos, ejercicios, etc. */}
+            <Text style={styles.description}>{reaction.description}</Text>
+            <ScrollView contentContainerStyle={styles.content}>
                 <View style={styles.section}>
                     {switchScreenOptions()}
                 </View>
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginTop: 8,
         marginBottom: 16,
+        paddingLeft:10
     },
     iconCircle: {
         width: 52,
@@ -114,6 +116,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 22,
         marginBottom: 24,
+        paddingLeft:10
     },
     section: {
         marginTop: 8,

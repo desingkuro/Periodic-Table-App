@@ -82,7 +82,7 @@ export default function Table() {
     };
 
     return (
-        <ScreenView top={true} bottom={false}>
+        <ScreenView top bottom>
             <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false}

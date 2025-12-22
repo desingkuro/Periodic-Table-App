@@ -1,8 +1,8 @@
 // ElementDetailScreen.tsx
-import EstructuraTab from "@/shared/components/EstructuraTab";
-import PropiedadesTab from "@/shared/components/PropiedadesTab";
-import { ResumenTab } from "@/shared/components/ResumenTab";
-import Section from "@/shared/components/Section";
+import EstructuraTab from "@/shared/components/table/EstructuraTab";
+import PropiedadesTab from "@/shared/components/table/PropiedadesTab";
+import { ResumenTab } from "@/shared/components/table/ResumenTab";
+import Section from "@/shared/components/table/Section";
 import ScreenView from "@/shared/components/ViewScreen";
 import { contexto } from "@/shared/context/ContextoGeneral";
 import { ElementoQuimico } from "@/shared/interfaces/Table.interface";
@@ -49,7 +49,7 @@ export default function ElementDetailScreen() {
     };
 
     return (
-        <ScreenView>
+        <ScreenView bottom> 
             <View style={styles.container}>
                 {/* Header */}
                 <View style={[styles.header, { backgroundColor: element.categoria_color }]}>

@@ -1,5 +1,5 @@
+import { ElementoQuimico } from "@/shared/interfaces/Table.interface";
 import { Image, StyleSheet, Text, View } from "react-native";
-import { ElementoQuimico } from "../interfaces/Table.interface";
 import AtomicCard from "./AtomicCard";
 import Section from "./Section";
 

@@ -1,4 +1,5 @@
 // ImageViewerModalSimple.tsx
+import ScreenView from "@/shared/components/ViewScreen";
 import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import React from "react";
@@ -12,7 +13,6 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import ScreenView from "./ViewScreen";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 

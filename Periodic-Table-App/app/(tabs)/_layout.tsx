@@ -1,48 +1,60 @@
+import TabBar from '@/shared/components/TabBar';
 import { TabBarIcon } from '@/shared/components/TabBarIcon';
 import { ContextoGeneral } from '@/shared/context/ContextoGeneral';
+import { BottomTabBarButtonProps } from '@react-navigation/bottom-tabs';
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Pressable, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export default function TabLayout() {
+  const TAB_HEIGHT = 70;
 
   return (
     <ContextoGeneral>
       <Tabs
         screenOptions={{
           headerShown: false,
-          tabBarActiveTintColor: '#000000',
-          tabBarInactiveTintColor: '#c9c9c9',
+          tabBarActiveTintColor: '#1a1a1a',
+          tabBarInactiveTintColor: '#888888',
+          tabBarShowLabel: true,
+          tabBarLabelStyle: {
+            fontSize: 11,
+            fontWeight: '600',
+            marginTop: 2,
+          },
           tabBarStyle: {
-            height: 60,
-            backgroundColor: '#fff',
-            borderRadius: 16,
             position: 'absolute',
+            left: 16,
+            right: 16,
             bottom: 20,
-            left: 15,
-            right: 15,
-            width:'auto',
-            marginLeft:15,
-            marginRight:15,
-            display: 'flex',
-            justifyContent: 'space-evenly',
+            height: TAB_HEIGHT,
+            paddingTop: 8,
+            paddingHorizontal: 8,
+            backgroundColor: '#ffffff',
+            borderRadius: 20,
+            borderTopWidth: 0,
+            marginHorizontal: 12,
           },
-          tabBarButton(props) {
-            return <Pressable style={[props.accessibilityState?.selected ? { backgroundColor: '#c9c9c9' } : {},style.tabBarButton]} onPress={props.onPress}>{props.children}</Pressable>
-          },
-        }}>
+          tabBarButton: (props:BottomTabBarButtonProps) => TabBar(props),
+          animation: 'shift',
+        }}
+      >
         <Tabs.Screen
           name="(table)"
           options={{
-            title: 'Tabla Periodica',
-            tabBarIcon: ({ focused, color }) => <TabBarIcon name="table" color={focused ? color : '#c9c9c9'} />,
+            title: 'Home',
+            tabBarIcon: ({ focused, color }) => (
+              <TabBarIcon name="home" color={color} size={focused ? 24 : 22} />
+            ),
           }}
         />
         <Tabs.Screen
           name="(reactions)"
           options={{
-            title: 'Reacciones',
-            tabBarIcon: ({ focused, color }) => <TabBarIcon name="flask" color={focused ? color : '#c9c9c9'} />,
+            title: 'Explore',
+            tabBarIcon: ({ focused, color }) => (
+              <TabBarIcon name="flask" color={color} size={focused ? 24 : 22} />
+            ),
           }}
         />
       </Tabs>
@@ -50,10 +62,26 @@ export default function TabLayout() {
   );
 }
 
-const style = StyleSheet.create({
-  tabBarButton: {
+const styles = StyleSheet.create({
+  tabBarButtonWrapper: {
+    flex: 1,
     alignItems: 'center',
-    borderRadius: 16,
-    padding: 10,
-  }
-})
+    justifyContent: 'center',
+  },
+  tabBarButton: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 12,
+    minWidth: 70,
+    backgroundColor: 'transparent',
+  },
+  tabBarButtonActive: {
+    backgroundColor: '#f5f5f5',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+});

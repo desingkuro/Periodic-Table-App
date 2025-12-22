@@ -1,6 +1,7 @@
 // app/reactions/[id].tsx
 import AcidBaseNeutralization from "@/shared/components/reactions/AcidBaseNeutralization";
 import CombustionReaction from "@/shared/components/reactions/CombustionReaction";
+import RedoxReaction from "@/shared/components/reactions/RedoxReaction";
 import ScreenView from "@/shared/components/ViewScreen";
 import { REACTIONS, ReactionItem } from "@/shared/data/reactions";
 import { Ionicons } from "@expo/vector-icons";
@@ -19,7 +20,7 @@ export default function ReactionDetailScreen() {
 
     if (!reaction) {
         return (
-            <ScreenView top bottom>
+            <ScreenView top bottom >
                 <View style={styles.center}>
                     <Text style={styles.errorTitle}>Reacción no encontrada</Text>
                     <Text style={styles.errorText}>
@@ -47,6 +48,8 @@ export default function ReactionDetailScreen() {
                 return <CombustionReaction />
             case "acid-base":
                 return <AcidBaseNeutralization />
+            case "redox":
+                return <RedoxReaction />
             default:
                 return <Text>Reacción no encontrada</Text>
         }
@@ -91,7 +94,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginTop: 8,
         marginBottom: 16,
-        paddingLeft:10
+        paddingLeft: 10
     },
     iconCircle: {
         width: 52,
@@ -116,7 +119,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 22,
         marginBottom: 24,
-        paddingLeft:10
+        paddingLeft: 10
     },
     section: {
         marginTop: 8,

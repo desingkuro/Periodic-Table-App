@@ -1,5 +1,8 @@
-import { View } from "react-native";
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import React from "react";
+import {
+    View
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ColorsPrimary } from "../constants/Colors";
 
 interface ScreenViewProps {
@@ -8,14 +11,23 @@ interface ScreenViewProps {
     bottom?: boolean;
 }
 
-export default function ScreenView({ children, top, bottom }: ScreenViewProps) {
+const TAB_BAR_HEIGHT = 70 + 10; // altura tab + bottom margin + espacio extra
+
+export default function ScreenView({
+    children,
+    top,
+    bottom,
+}: ScreenViewProps) {
     const insets = useSafeAreaInsets();
+
+    const bottomPadding = bottom ? TAB_BAR_HEIGHT : insets.bottom;
+
     return (
-        <View style={{
-            flex: 1, paddingBottom: bottom ? insets.bottom+40 : 65, paddingTop: top ? insets.top : 0,
-            backgroundColor: ColorsPrimary.fondo,
-        }}>
+
+        <View
+            style={{ flex: 1, paddingBottom: bottomPadding, paddingTop: top ? insets.top : 0, backgroundColor: ColorsPrimary.fondo }}
+        >
             {children}
         </View>
-    )
+    );
 }

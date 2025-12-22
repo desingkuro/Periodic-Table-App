@@ -1,5 +1,5 @@
 // app/Reactions.tsx
-import { ReactionCard } from "@/shared/components/ReactionCard";
+import { ReactionCard } from "@/shared/components/table/ReactionCard";
 import ScreenView from "@/shared/components/ViewScreen";
 import { REACTIONS, ReactionItem } from "@/shared/data/reactions";
 import { RelativePathString, useRouter } from "expo-router";

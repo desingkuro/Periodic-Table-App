@@ -35,23 +35,23 @@ export default function TabLayout() {
             borderTopWidth: 0,
             marginHorizontal: 12,
           },
-          tabBarButton: (props:BottomTabBarButtonProps) => TabBar(props),
+          tabBarButton: (props: BottomTabBarButtonProps) => TabBar(props),
           animation: 'shift',
         }}
-      >
+      > 
         <Tabs.Screen
           name="(table)"
           options={{
-            title: 'Home',
+            title: 'Tabla',
             tabBarIcon: ({ focused, color }) => (
-              <TabBarIcon name="home" color={color} size={focused ? 24 : 22} />
+              <TabBarIcon name="table" color={color} size={focused ? 24 : 22} />
             ),
           }}
         />
         <Tabs.Screen
           name="(reactions)"
           options={{
-            title: 'Explore',
+            title: 'Reacciones',
             tabBarIcon: ({ focused, color }) => (
               <TabBarIcon name="flask" color={color} size={focused ? 24 : 22} />
             ),

@@ -1,6 +1,9 @@
 // app/reactions/[id].tsx
 import AcidBaseNeutralization from "@/shared/components/reactions/AcidBaseNeutralization";
 import CombustionReaction from "@/shared/components/reactions/CombustionReaction";
+import InorganicIdentification from "@/shared/components/reactions/InorganicIdentification";
+import OrganicIdentification from "@/shared/components/reactions/OrganicIdentification";
+import OrganicSubstitution from "@/shared/components/reactions/OrganicSubstitution";
 import RedoxReaction from "@/shared/components/reactions/RedoxReaction";
 import ScreenView from "@/shared/components/ViewScreen";
 import { REACTIONS, ReactionItem } from "@/shared/data/reactions";
@@ -50,6 +53,12 @@ export default function ReactionDetailScreen() {
                 return <AcidBaseNeutralization />
             case "redox":
                 return <RedoxReaction />
+            case "organic-id":
+                return <OrganicIdentification />
+            case "inorganic-id":
+                return <InorganicIdentification />;
+            case "substitution":
+                return <OrganicSubstitution />;
             default:
                 return <Text>Reacción no encontrada</Text>
         }

@@ -1,17 +1,20 @@
 import { CellElement } from "@/shared/components/CellElement";
+import { PeriodicTableLegend } from "@/shared/components/table/PeriodicTableLegend";
 import ScreenView from "@/shared/components/ViewScreen";
 import { contexto } from "@/shared/context/ContextoGeneral";
 import { buildPeriodicGrid, COLS, GridCell } from "@/shared/hooks/useGrid";
 import { ElementoQuimico } from "@/shared/interfaces/Table.interface";
 import { useRouter } from "expo-router";
-import React, { useCallback, useContext, useMemo } from "react";
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useCallback, useContext, useMemo, useRef } from "react";
+import { Animated, FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 
 const CELL = 100;
 
 export default function Table() {
     const router = useRouter();
-    const { datosTabla, setElementSelect }: any = useContext(contexto);
+    const { datosTabla, setElementSelect, colorsCategory }: any = useContext(contexto);
+    const scrollY = useRef(new Animated.Value(0)).current;
+
 
     const { grid } = useMemo(
         () => buildPeriodicGrid(datosTabla ?? []),
@@ -58,7 +61,7 @@ export default function Table() {
                 return <View style={styles.emptyCell} />;
 
             case "element":
-                return <CellElement element={item.element} funcion={() => {toggleElementSelect(item.element)}} />;
+                return <CellElement element={item.element} funcion={() => { toggleElementSelect(item.element) }} />;
 
             default:
                 return <View style={styles.emptyCell} />;
@@ -99,10 +102,16 @@ export default function Table() {
                         getItemLayout={getItemLayout}
                         initialNumToRender={COLS * 4}
                         maxToRenderPerBatch={COLS * 3}
+                        onScroll={Animated.event(
+                            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                            { useNativeDriver: false }
+                        )}
                         windowSize={7}
                         updateCellsBatchingPeriod={16}
                         removeClippedSubviews={true}
                     />
+                    {/* Leyenda flotante */}
+                    <PeriodicTableLegend scrollY={scrollY} colorsCategory={colorsCategory}/>
                 </View>
             </ScrollView>
         </ScreenView>

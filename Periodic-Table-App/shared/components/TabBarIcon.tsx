@@ -7,5 +7,5 @@ export function TabBarIcon({
     name: React.ComponentProps<typeof FontAwesome>['name'];
     color: string;
 }) {
-    return <FontAwesome size={28} style={{ marginBottom: -3 }} name={name} color={color} />;
+    return <FontAwesome size={28} name={name} color={color} />;
 }

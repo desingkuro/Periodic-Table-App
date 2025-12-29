@@ -14,7 +14,7 @@ export default function TabLayout() {
       <Tabs
         screenOptions={{
           headerShown: false,
-          tabBarActiveTintColor: '#1a1a1a',
+          tabBarActiveTintColor: '#126dd4ff',
           tabBarInactiveTintColor: '#888888',
           tabBarShowLabel: true,
           tabBarLabelStyle: {
@@ -29,11 +29,11 @@ export default function TabLayout() {
             bottom: 20,
             height: TAB_HEIGHT,
             paddingTop: 8,
-            paddingHorizontal: 8,
+            paddingHorizontal: 6, 
             backgroundColor: '#ffffff',
             borderRadius: 20,
             borderTopWidth: 0,
-            marginHorizontal: 12,
+            marginHorizontal: 56,
           },
           tabBarButton: (props: BottomTabBarButtonProps) => TabBar(props),
           animation: 'shift',
@@ -44,7 +44,7 @@ export default function TabLayout() {
           options={{
             title: 'Tabla',
             tabBarIcon: ({ focused, color }) => (
-              <TabBarIcon name="table" color={color} size={focused ? 24 : 22} />
+              <TabBarIcon name="table" color={color} size={focused ? 30 : 20} />
             ),
           }}
         />
@@ -53,7 +53,7 @@ export default function TabLayout() {
           options={{
             title: 'Reacciones',
             tabBarIcon: ({ focused, color }) => (
-              <TabBarIcon name="flask" color={color} size={focused ? 24 : 22} />
+              <TabBarIcon name="flask" color={color} size={focused ? 30 : 20} />
             ),
           }}
         />

@@ -7,13 +7,17 @@ import { ElementoQuimico } from "@/shared/interfaces/Table.interface";
 import { useRouter } from "expo-router";
 import React, { useCallback, useContext, useMemo, useRef } from "react";
 import { Animated, FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
 const CELL = 100;
+const adUnitId = 'ca-app-pub-6195557105445619/6300198279';
 
 export default function Table() {
     const router = useRouter();
     const { datosTabla, setElementSelect, colorsCategory }: any = useContext(contexto);
     const scrollY = useRef(new Animated.Value(0)).current;
+    const bannerRef = useRef<BannerAd>(null);
+
 
 
     const { grid } = useMemo(
@@ -111,9 +115,14 @@ export default function Table() {
                         removeClippedSubviews={true}
                     />
                     {/* Leyenda flotante */}
-                    <PeriodicTableLegend scrollY={scrollY} colorsCategory={colorsCategory}/>
+                    <PeriodicTableLegend scrollY={scrollY} colorsCategory={colorsCategory} />
                 </View>
             </ScrollView>
+            <BannerAd
+                unitId={adUnitId}
+                size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+                ref={bannerRef}
+            />
         </ScreenView>
     );
 }

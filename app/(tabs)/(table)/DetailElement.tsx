@@ -7,7 +7,7 @@ import ScreenView from "@/shared/components/ViewScreen";
 import { contexto } from "@/shared/context/ContextoGeneral";
 import { ElementoQuimico } from "@/shared/interfaces/Table.interface";
 import { Ionicons } from "@expo/vector-icons";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
     Image,
     Linking,
@@ -17,12 +17,15 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
+import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
 type Tab = "resumen" | "propiedades" | "estructura" | "mas";
+const adUnitId = 'ca-app-pub-6195557105445619/3630459447';
 
 export default function ElementDetailScreen() {
     const [activeTab, setActiveTab] = useState<Tab>("resumen");
     const { elementSelect }: any = useContext(contexto);
+    const bannerRef = useRef<BannerAd>(null);
 
     // ← GUARDAR LOCALMENTE para evitar que se pierda durante la transición
     const [localElement, setLocalElement] = useState<ElementoQuimico | null>(elementSelect);
@@ -49,7 +52,7 @@ export default function ElementDetailScreen() {
     };
 
     return (
-        <ScreenView bottom> 
+        <ScreenView bottom>
             <View style={styles.container}>
                 {/* Header */}
                 <View style={[styles.header, { backgroundColor: element.categoria_color }]}>
@@ -110,6 +113,11 @@ export default function ElementDetailScreen() {
                         <MasTab element={element} onOpenLink={openLink} />
                     )}
                 </ScrollView>
+                <BannerAd
+                    unitId={adUnitId}
+                    size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+                    ref={bannerRef}
+                />
             </View>
         </ScreenView>
     );

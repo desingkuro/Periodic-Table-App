@@ -9,12 +9,15 @@ import ScreenView from "@/shared/components/ViewScreen";
 import { REACTIONS, ReactionItem } from "@/shared/data/reactions";
 import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React, { useMemo } from "react";
+import React, { useMemo, useRef } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
+const adUnitId = 'ca-app-pub-6195557105445619/3482463246';
 
 export default function ReactionDetailScreen() {
     const { id } = useLocalSearchParams<{ id?: string }>();
     const router = useRouter();
+    const bannerRef = useRef<BannerAd>(null);
 
     const reaction: ReactionItem | undefined = useMemo(
         () => REACTIONS.find(r => r.id === id),
@@ -88,6 +91,11 @@ export default function ReactionDetailScreen() {
                 <View style={styles.section}>
                     {switchScreenOptions()}
                 </View>
+                <BannerAd
+                    unitId={adUnitId}
+                    size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+                    ref={bannerRef}
+                />
             </ScrollView>
         </ScreenView>
     );

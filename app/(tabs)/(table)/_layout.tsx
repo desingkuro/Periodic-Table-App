@@ -9,8 +9,8 @@ export default function LayoutTable() {
     const router = useRouter();
     return (
         <Stack screenOptions={{ animation: "default" }}>
-            <Stack.Screen name="Index" options={{ headerShown: false }} />
-            <Stack.Screen name="DetailElement"
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="detailElement"
                 options={{
                     title: elementSelect?.nombre || "Elemento",
                     headerStyle: { backgroundColor: "#474747" },

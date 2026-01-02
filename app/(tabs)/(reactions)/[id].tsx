@@ -91,11 +91,11 @@ export default function ReactionDetailScreen() {
                 <View style={styles.section}>
                     {switchScreenOptions()}
                 </View>
-                <BannerAd
+                {<BannerAd
                     unitId={adUnitId}
                     size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
                     ref={bannerRef}
-                />
+                />}
             </ScrollView>
         </ScreenView>
     );

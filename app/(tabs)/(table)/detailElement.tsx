@@ -113,11 +113,11 @@ export default function ElementDetailScreen() {
                         <MasTab element={element} onOpenLink={openLink} />
                     )}
                 </ScrollView>
-                <BannerAd
+                {<BannerAd
                     unitId={adUnitId}
                     size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
                     ref={bannerRef}
-                />
+                />}
             </View>
         </ScreenView>
     );

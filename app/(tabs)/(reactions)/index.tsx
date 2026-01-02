@@ -33,11 +33,11 @@ export default function Reactions() {
                     <ReactionCard item={item} onPress={handlePress} />
                 )}
             />
-            <BannerAd
+            {<BannerAd
                 unitId={adUnitId}
                 size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
                 ref={bannerRef}
-            />
+            />}
         </ScreenView>
     );
 }

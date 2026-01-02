@@ -85,7 +85,7 @@ export default function Table() {
 
     const toggleElementSelect = (element: ElementoQuimico | null) => {
         setElementSelect(element);
-        router.push('/(tabs)/(table)/DetailElement');
+        router.push('/(tabs)/(table)/detailElement');
     };
 
     return (

@@ -7,7 +7,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 
 export default function TabLayout() {
-  const TAB_HEIGHT = 70;
+  const TAB_HEIGHT = 50;
 
   return (
     <ContextoGeneral>

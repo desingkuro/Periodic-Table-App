@@ -2,7 +2,7 @@
   "expo": {
     "name": "Tabla Periodica",
     "slug": "Tabla-Periodica-App",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "periodictableapp",
@@ -25,7 +25,7 @@
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
       "package": "com.yeiler2209.TablaPeriodicaApp",
-      "versionCode": 3
+      "versionCode": 4
     },
     "web": {
       "bundler": "metro",

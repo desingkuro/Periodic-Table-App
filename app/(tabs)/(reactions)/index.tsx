@@ -3,14 +3,14 @@ import { ReactionCard } from "@/shared/components/table/ReactionCard";
 import ScreenView from "@/shared/components/ViewScreen";
 import { REACTIONS, ReactionItem } from "@/shared/data/reactions";
 import { RelativePathString, useRouter } from "expo-router";
-import React from "react";
+import React, { useRef } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-//import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
-//const adUnitId = 'ca-app-pub-6195557105445619/3630459447';
+import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
+const adUnitId = 'ca-app-pub-6195557105445619/3630459447';
 
 export default function Reactions() {
     const navigation = useRouter();
-    //const bannerRef = useRef<BannerAd>(null);
+    const bannerRef = useRef<BannerAd>(null);
     const handlePress = (item: ReactionItem) => {
         const path: RelativePathString = ('/(tabs)/(reactions)/' + item.id as any)
         navigation.push(path)
@@ -33,11 +33,11 @@ export default function Reactions() {
                     <ReactionCard item={item} onPress={handlePress} />
                 )}
             />
-            {/*<BannerAd
+            <BannerAd
                 unitId={adUnitId}
                 size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
                 ref={bannerRef}
-            />*/}
+            />
         </ScreenView>
     );
 }

@@ -1,5 +1,6 @@
 import TabBar from '@/shared/components/TabBar';
 import { TabBarIcon } from '@/shared/components/TabBarIcon';
+import { ColorsPrimary } from '@/shared/constants/Colors';
 import { ContextoGeneral } from '@/shared/context/ContextoGeneral';
 import { BottomTabBarButtonProps } from '@react-navigation/bottom-tabs';
 import { Tabs } from 'expo-router';
@@ -7,15 +8,15 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 
 export default function TabLayout() {
-  const TAB_HEIGHT = 50;
+  const TAB_HEIGHT = 55;
 
   return (
     <ContextoGeneral>
       <Tabs
         screenOptions={{
           headerShown: false,
-          tabBarActiveTintColor: '#126dd4ff',
-          tabBarInactiveTintColor: '#888888',
+          tabBarActiveTintColor: '#65adffff',
+          tabBarInactiveTintColor: '#c4c4c4ff',
           tabBarShowLabel: true,
           tabBarLabelStyle: {
             fontSize: 11,
@@ -23,17 +24,10 @@ export default function TabLayout() {
             marginTop: 2,
           },
           tabBarStyle: {
-            position: 'absolute',
-            left: 16,
-            right: 16,
-            bottom: 20,
             height: TAB_HEIGHT,
-            paddingTop: 8,
-            paddingHorizontal: 6, 
-            backgroundColor: '#ffffff',
-            borderRadius: 20,
+            paddingBottom: 35,
+            backgroundColor: ColorsPrimary.fondo,
             borderTopWidth: 0,
-            marginHorizontal: 56,
           },
           tabBarButton: (props: BottomTabBarButtonProps) => TabBar(props),
           animation: 'shift',
